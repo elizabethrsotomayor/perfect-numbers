@@ -1,15 +1,8 @@
 def classify(number: int) -> str:
-    aliquot_sum = 0
-    if number > 0:
-        for n in range(1, number):
-            if number % n == 0:
-                aliquot_sum += n
-
-        if aliquot_sum == number:
-            return "perfect"
-        elif aliquot_sum > number:
-            return "abundant"
-        elif aliquot_sum < number:
-            return "deficient"
+    """Determine if a number is perfect, abundant, or deficient based on Nicomachus' classification scheme
+    for natural numbers."""
+    if number <= 0:
+        raise ValueError("Only positive integers!")
     else:
-        raise ValueError(r".+")
+        s = sum(i for i in range(1, (number//2)+1) if not number % i)
+    return "perfect" if s == number else "abundant" if s > number else "deficient"
